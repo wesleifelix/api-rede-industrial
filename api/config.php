@@ -2,7 +2,7 @@
 
         header('Access-Control-Allow-Origin: *');
         header("Content-type: application/json; charset=utf-8");
-        define("_FILENAME",  "database.json");
+     
 
         class Config{
             public $database;
