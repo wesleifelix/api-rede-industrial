@@ -4,13 +4,6 @@ require_once "config.php";
 require_once "model.php";
 
 
-
-$bae = new User();
-
-$bae->nome = "Weslei Felix";
-$bae->email = "wesleifelix". rand(0,100)."@gmail.com";
-$bae->senha = "123456";
-
 function CallAPI($method = "GET", $url = "listAll", $data = false, $params = null)
 {
 
@@ -19,16 +12,13 @@ function CallAPI($method = "GET", $url = "listAll", $data = false, $params = nul
         case "GET":
             if($url == "listAll"){
                 http_response_code(200);
-               
                 $list = (array)$con->List();
                 echo json_encode( array_values($list));
                 exit();
             }
             else if($url == "list" ){
-
                 if($data ){
                     $return = ($con->findObjectByID($params['id']));
-                    
                     if(!$return){
                       $con->NoFound();
                       exit;
@@ -54,16 +44,13 @@ function CallAPI($method = "GET", $url = "listAll", $data = false, $params = nul
                 if($url == "update"){
                     $json = file_get_contents('php://input');
                     $user = ValidUser($json);
-
                     if($user['id'] == $params['id'])
                         $con->Update($user, 'id', $params['id']);
                 }
                 break;
             
             case "DELETE":
-
                 if($url == "delete"){
-                   
                     $con->Delete('id',$params['id']);
                 }
                 break;
